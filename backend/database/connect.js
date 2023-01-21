@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const uri = 'mongodb://localhost:27017/codefriendup';
+const dotenv = require('dotenv')
+dotenv.config({path:'../config.env'})
+const pass = process.env.password
+const uri = 'mongodb+srv://root:naNWsRdaoAoKkgos@cluster0.ligpuzz.mongodb.net/?retryWrites=true&w=majority';
 
 const options = {
     useNewUrlParser: true,
