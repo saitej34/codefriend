@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config({path:'../config.env'})
 const pass = process.env.password
-const uri = 'mongodb+srv://root:naNWsRdaoAoKkgos@cluster0.ligpuzz.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://root:1og9LkTHOSmn3zeT@cluster0.ligpuzz.mongodb.net/?retryWrites=true&w=majority';
 
 const options = {
     useNewUrlParser: true,

@@ -151,44 +151,22 @@ router.get('/getp/:ids',async(req,res)=>{
 })
 
 
-router.put('/editprofile',middleware,(req, res) => {
-      const idv = req.user;
-      var password,cpassword;
-      const p = model.findById(idv,(err,data)=>{
-           if(err)
-           {
-               return res.json(err);
-           }
-           console.log(data.name);
-          password = req.body.password;
-          cpassword = req.body.cpassword;
-      });
-      var name = req.body.name;
-      var email = req.body.email;
-      var profilepic = req.body.profilepic;
-      var college = req.body.college;
-      var sbio = req.body.sbio;
-      var linkdeinprofile = req.body.linkdeinprofile;
-      model.findAndUpdate({id:idv},{$set:{
-          name:name,
-          email:email,
-          password:password,
-          cpassword:cpassword,
-          profilepic:profilepic,
-          college:college,
-          sbio:sbio,
-          linkdeinprofile:linkdeinprofile
-
-      }},(err,data)=>{
-          if(err)
-          {
-               res.send(err);
-          }
-          else
-          {
-               res.json(data);
-          }
-      })
+router.put('/editprofile',(req, res) => {
+    console.log(req.body);
+    var email = req.body.email;
+    var newdata = req.body;
+    const exist = model.findOne({email},(err, data) => {
+      if(err)
+      {
+        return res.json(err);
+      }
+      else{
+          var idv = data.id;
+          const d = model.findOneAndUpdate({_id: idv},req.body,{new:true},(err,dat)=>{
+            res.send(dat);
+          });
+      }
+    });
 })
 
 

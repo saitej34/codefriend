@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import './Comp.css'
 import Display from './Display'
 import imuser from './user.png'
-
+import Avatar from '@mui/material/Avatar';
 
 const DashBoard = () => {
   navigator.geolocation.getCurrentPosition(function(position) {
@@ -19,6 +19,7 @@ const DashBoard = () => {
   const idss = new Array();
   const arrs = new Array();
   const keys = new Array();
+  const [img,setimg] = useState('');
   const [name,setname] = useState('');
   const [email,setemail] = useState('');
   const [profile,setprofile] = useState('');
@@ -38,7 +39,7 @@ const DashBoard = () => {
   }
   const subdetails = (e)=>{
        axios.put('http://localhost:5000/editprofile',{
-            name:name,
+            name:user,
             email:email,
             profilepic:profile,
             college:coll,
@@ -63,6 +64,7 @@ const DashBoard = () => {
           console.log(response.data.name);
           setemail(response.data.email);
           setuser(response.data.name);
+          setimg(response.data.profilepic);
     }).catch((error)=>{
       console.log(error);
     })
@@ -159,7 +161,12 @@ const DashBoard = () => {
               </div>
               <br/><br/>
               <div class="col-md-4 d-flex justify-content-center">
-                  <a href="/signup" class="btn btn-warning text-center" onClick={log}>Logout</a>
+              <Avatar
+                alt="https://www.shutterstock.com/image-vector/profile-placeholder-image-gray-silhouette-no-1153673752"
+                src={img}
+                sx={{ width: 56, height: 56, marginRight: 20 }}
+              />
+                  <a class="btn btn-warning text-center" onClick={log}>Logout</a>
               </div>
           </div>
         <br/>
@@ -193,7 +200,7 @@ const DashBoard = () => {
     <div class="container">
           <div class="row">
             <div class="col-md-4">
-                <img src={imuser} class="img-responsive img-fluid" height="150px"/>
+                <img src={img} class="img-responsive img-fluid" height="150px"/>
             </div>
           </div>
     </div><br/><br/>
